@@ -1,13 +1,14 @@
 ---
-layout: post
 title:  "Sinusoidal and Rotary Positional Encodings"
-date:   2022-11-07 15:15:52 +0900
-# categories: attention transformers deep-learning positional-encodings
+categories:
+  - Blog
+tags:
+  - attention
+  - transformers
+  - deep-learning 
+  - positional-encodings
 ---
 
-# Introduction
-
-#### 
 
 Let's face it; the world is too complicated. Things change over time,
 multiple variables are associated with any given event or phenomenon,
@@ -15,8 +16,8 @@ and the layers of abstraction built up are dizzying. In our attempts to
 make sense of this complex, dynamic world around us, we seek to find
 *relationships between these variables*, uncovering the underlying
 patterns embedded in those abstractions.
+<!-- {: .notice} -->
 
-#### 
 
 Deep Learning is a method that attempts to uncover these patterns by
 learning from data. We represent a given problem with the data that it
@@ -36,9 +37,7 @@ and the previous state to find temporal patterns. And on and on. We're
 going to focus on this notion of weighted sums in this article as we
 explore the idea of positional encoding.
 
-# Attention
-
-#### 
+## Attention
 
 The attention mechanism, now being used everywhere, from computer vision
 problems, and natural language understanding, to sequence modelling and
@@ -53,7 +52,6 @@ methods of modelling sequential data with neural networks such as RNNs
 and LSTMs, as they parse each sequence step in order, unlike the
 parallel nature of attention mechanisms.
 
-#### 
 
 A scoring function generates the weights holding the relative importance
 of each value, such as a scaled dot product between the query and a key.
@@ -75,9 +73,8 @@ processed step-by-step, yet the parallel and scalable nature of
 attention are what we want to use. Handling this problem is where
 positional encodings come in.
 
-# Positional Encoding
 
-#### 
+## Positional Encoding
 
 Let us define the problem of including positional information in
 parallel sequence modelling. What do we want? We want the scoring
@@ -88,7 +85,6 @@ between the query and the key. Position is an absolute and relative
 concept, which is exactly what we want the scoring function to
 understand.
 
-#### 
 
 The simplest way of encoding position is to label each position with its
 index in the sequence, adding/concatenating this information to the
@@ -100,7 +96,6 @@ concatenated to the key/query vectors will become larger and larger.
 Large indices are likely to play poorly when deep neural networks are
 susceptible to unstable training depending on numeric scale.
 
-#### 
 
 Can't we just normalize it? somebody shouts from the back. Sure, that is
 a way forward in solving the scale problem, but how are you going to
@@ -110,7 +105,6 @@ different position encodings! We can't have that! The same position,
 regardless of length of the original sequence has to have the same
 encoding for the model.
 
-#### 
 
 It becomes evident that using a single number to encode the unique
 position of each token in a sequence might not be enough. Consider using
@@ -130,7 +124,6 @@ is not an injective nor a continuous function. It'd be better to have a
 proper function mapping the values of the vector given its scalar order,
 namely a discretization of continuous function.
 
-#### 
 
 The function that the original authors of the 'Attention is all you
 need' paper decided to use is the sine function. The binary
@@ -152,7 +145,6 @@ radians, and the last dimension will have a maximum period of
 $\omega * 2\pi$ radians. The authors set $\omega$ as $10000$, probably a
 choice made after experimentation.
 
-#### 
 
 Wow, we're finally here, the holy grail of encoding absolute positions
 with a vector. We've found something that uniquely encodes the position
@@ -168,7 +160,6 @@ vectors can translate the position vector to different positions. In
 that case, this will also match the linear combination of tokens in the
 sequence, attending to the relative position as we wanted.
 
-#### 
 
 The extension comes by selecting rotation as the linear transformation
 that translates between positions. If we use pairs of sine and cosines
@@ -177,8 +168,7 @@ pairs in the position vector by a certain angle. The relative position
 between the query and the key determines the angle. Woop woop! We're
 here!
 
-#### 
-
+ 
 The final positional encoding vector is as follows:
 
 $$\begin{aligned}
@@ -191,13 +181,11 @@ $$\begin{aligned}
 Pairs of sine and cosine with the same period are used, and the period
 monotonically increases as you go down the pairs in dimension.
 
-::: center
-![image](/positional-encoding/assets/positional_encoding/sin_pos_enc.png)
-:::
+{:refdef: style="text-align: center;"}
+![image](/assets/positional_encoding/sin_pos_enc.png)
+{: refdef}
 
-# Rotary Positional Encoding - RoPE
-
-#### 
+## Rotary Positional Encoding - RoPE
 
 Sinusoidal absolute positional encoding is one of many ways to encode a
 sequence's position. Numerous research has been done since the original
@@ -205,8 +193,7 @@ Transformer paper, coming up with methods such as T5 or Transformer XL's
 relative positional bias or even learnable embeddings, unlike the fixed
 versions we've discussed.
 
-#### 
-
+ 
 Relative encodings are based on creating a pairing of positions in the
 sequence and then encoding the relative difference between them. The
 pairing is typically expressed with a $N$ x $N$ matrix between
@@ -214,7 +201,6 @@ positions, which might not work with efficient transformer
 implementations. The point is there needs to be a more principled
 approach to coming up with these encodings, and RoPE is one of them.
 
-#### 
 
 The good people at EleutherAI developed a principled approach to the
 relative positional encoding that is generally applicable and works for
@@ -224,7 +210,6 @@ between tokens at different positions, they create a constraint on the
 inner product of the query and key that incorporates relative positional
 information.
 
-#### 
 
 We want to find a **positional encoding function** $f(\mathbf{x}, l)$
 for token $\mathbf{x}$ and its position $l$ such that for two items
@@ -233,7 +218,6 @@ the following:
 
 $$\left < f(\mathbf{x_q}, m), f(\mathbf{x_k}, n) \right > = g(\mathbf{x_q}, \mathbf{x_k}, n-m)$$
 
-#### 
 
 That is, the inner product between two position-encoded vectors should
 only be dependent on the original vectors and their relative positional
@@ -246,13 +230,14 @@ dot product in the attention mechanism to have this property: preserving
 the relative positional information while discarding the absolute
 position. Recall that the geometric interpretation of the dot product is
 given as
+
 $$\mathbf{x} \cdot \mathbf{y} = ||\mathbf{x}|| ||\mathbf{y}|| \cos \theta$$
+
 where $\theta$ is the angle between the vectors. **If we can represent
 the positional information as rotations applied to the vectors**, it
 satisfies the preservation of relative differences as if the same angle
 rotates both vectors, their dot product won't change.
 
-#### 
 
 To find the function that maps the positional information to rotations,
 we first change our view of the token vector to be a vector of complex
@@ -264,62 +249,57 @@ As
 
 $$\mathbf{x_q} = (x_{q1} + ix_{q2}, x_{q3} + ix_{q4}, \dots, x_{qd-1} + ix_{qd}) \in \mathbb{C}^{d/2}$$
 
-#### 
-
+ 
 In this representation, the positional encoding functions become:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
         f(\mathbf{x_q}, m) &= R_{f(\mathbf{x_q}, m)}e^{i\Theta_{f(\mathbf{x_q}, m)}} \\
         f(\mathbf{x_k}, m) &= R_{f(\mathbf{x_k}, n)}e^{i\Theta_{f(\mathbf{x_k}, n)}} \\
         g(\mathbf{x_q},\mathbf{x_k}, n-m) &= R_{g(\mathbf{x_q},\mathbf{x_k}, n-m)}e^{i\Theta_{g(\mathbf{x_q},\mathbf{x_k}, n-m)}} \\
-    
-\end{aligned}$$
+\end{aligned}
+$$
 
-#### 
 
 The inner product with this representation yields the following
 equations:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
         R_{f(\mathbf{x_q}, m)}R_{f(\mathbf{x_k}, n)} &= R_{g(\mathbf{x_q},\mathbf{x_k}, n-m)} \\
         \Theta_{f(\mathbf{x_q}, m)} - \Theta_{f(\mathbf{x_k}, n)} &= \Theta_{g(\mathbf{x_q},\mathbf{x_k}, n-m)}
-    
-\end{aligned}$$
+\end{aligned}
+$$
 
-#### 
 
 This is from the fact that given two complex numbers $z_1$ and $z_2$,
 the inner product is given by
 $z_1 \cdot z_2 = |z_1||z_2| \cos(\theta_1 - \theta_2)$ where $\theta_1$
 and $\theta_2$ are the angles of the complex numbers.
 
-#### 
+ 
 
 By setting some intial condition $f(\mathbf{x}, 0) = \mathbf{x}$, we
 notice that
 
 $$R_{f(\mathbf{x_q}, 0)}R_{f(\mathbf{x_k}, 0)} = R_{g(\mathbf{x_q},\mathbf{x_k}, 0)} = \mathbf{x_q}\mathbf{x_k}$$
 
-#### 
 
 If $R_{g(\mathbf{x_q},\mathbf{x_k}, 0)} = \mathbf{x_q}\mathbf{x_k}$ Then
 for all $m = n$ we have that
 $R_{f(\mathbf{x_q}, m)}R_{f(\mathbf{x_k}, m)} = \mathbf{x_q}\mathbf{x_k}$
 as well as $m-m = 0$
 
-#### 
 
 This means that $R$ is indpendent of the position $m$, and ths we can
-simply say $$R_{f(\mathbf{x}, y)} = \mathbf{x}$$ for all position $y$.
+simply say $R_{f(\mathbf{x}, y)} = \mathbf{x}$ for all position $y$.
 
-#### 
 
 Similarly, by setting the initial condition
 $\Theta(\mathbf{x}) = \Theta(\mathbf{x}, 0)$, we have:
 
 $$\Theta_{f(\mathbf{x_q}, 0)} - \Theta_{f(\mathbf{x_k}, 0)} = \Theta(\mathbf{x_q}) - \Theta(\mathbf{x_k})$$
 
-#### 
 
 Utilizing the same logic as the $R$ case, we can see that
 $\Theta_{f(\mathbf{x_q}, m)} - \Theta(\mathbf{x_q}) = \Theta_{f(\mathbf{x_k}, m)} - \Theta(\mathbf{x_k})$
@@ -329,9 +309,9 @@ the following useful representation of $\Theta_{f(x, m)}$:
 
 $$\Theta_{f(x, m)} = \Theta(\mathbf{x}) + \varphi(m)$$
 
-#### 
 
 Plugging this in to the original equation with m = n+1, we have:
+
 $$\begin{aligned}
         \Theta_{f(\mathbf{x_q}, m)} - \Theta_{f(\mathbf{x_k}, m+1)} &= \Theta_{g(\mathbf{x_q},\mathbf{x_k}, 1)} \\
         &= \Theta(\mathbf{x_q}) + \varphi(m) - \Theta(\mathbf{x_k}) - \varphi(m+1)\\
@@ -340,20 +320,18 @@ $$\begin{aligned}
     
 \end{aligned}$$
 
-#### 
-
+ 
 Interestingly, the RHS of the equation does not depend on $m$ and thus
 $\varphi$ must also not depend on $m$, rendering it down to an
 arithmetic progression. If we set initial values $\varphi(0) = 0$ and
 $\varphi(1) = \theta$, where $\theta$ is a step rotation amount to be
 decided, we have $\varphi(m) = m\theta$
 
-#### 
 
 Plugging this back into the original equation, we have:
+
 $$\Theta_{f(x, m)} = \Theta(\mathbf{x}) + m\theta$$
 
-#### 
 
 We now have all the ingredients to write the positional encoding
 functions in the complex form:
@@ -371,7 +349,6 @@ $$\begin{aligned}
     
 \end{aligned}$$
 
-#### 
 
 What a derivation that was! We arrived at our destination; we have a
 positional encoding function that takes in the token vectors and gives
@@ -379,30 +356,29 @@ us a position-encoded version that, when dot-producted with another
 position-encoded vector, will preserve the relative positional
 difference information.
 
-#### 
 
 To use it, it'd be best to change the view to the real version. As an
 intuitive example, let us reduce the problem down to the 2d case where
 
-$$\mathbf{x_q} = (x_{q1}, x_{q2}) \in \mathbb{R}^2$$
-$$\mathbf{x_q} = (x_{q1} + ix_{q2}) \in \mathbb{C}$$
+$$\begin{aligned}
+\mathbf{x_q} &= (x_{q1}, x_{q2}) \in \mathbb{R}^2 \\
+\mathbf{x_q} &= (x_{q1} + ix_{q2}) \in \mathbb{C}
+\end{aligned}$$
 
-#### 
 
 Here, applying the positional encoding function will look like the
 following.
 
-#### 
 
 Recall the positional encoding function:
+
 $$f(\mathbf{x}, m) = \mathbf{x}e^{im\theta}$$
 
-#### 
 
 Expand the exponential using Euler's identity:
+
 $$f(\mathbf{x}, m) = \mathbf{x}e^{im\theta} = \mathbf{x}(cos(m\theta) + isin(m\theta))$$
 
-#### 
 
 Applying this function to the 2D case will look like:
 
@@ -414,7 +390,6 @@ $$\begin{aligned}
     
 \end{aligned}$$
 
-#### 
 
 The real and imaginary parts of the complex number represent a pair of
 dimensions in the original 'real' case. We can see that the positional
@@ -434,6 +409,7 @@ $$\begin{aligned}
 \end{aligned}$$
 
 This can be written as a matrix multiplication as well:
+
 $$\begin{bmatrix}
         x_{q1} \\
         x_{q2}
@@ -448,24 +424,23 @@ $$\begin{bmatrix}
         x_{q2}
     \end{bmatrix}$$
 
-#### 
+ 
 
 This is precisely the rotation matrix we were talking about earlier! We
 managed to represent positional information as rotations applied to
 vectors!
 
-#### 
 
 We can generalize this to the $d$-dimensional case by applying the above
 to each pair of dimensions of the token vector.
 
-::: center
-![It's hard to show the position encoded vector as RoPE is a function
-that applies rotations to the token vector. So I just added a picture of
-a random query vector that has gone through RoPE](/positional-encoding/assets/positional_encoding/rotary.png)
-:::
+{:refdef: style="text-align: center;"}
+![rotary positonal encoded query](/assets/positional_encoding/rotary.png)
+{:refdef}
 
-#### 
+*It's hard to show the position encoded vector as RoPE is a function
+that applies rotations to the token vector. So I just added a picture of
+a random query vector that has gone through RoPE*
 
 This may seem similar to the absolute sinusoidal positional encoding
 function, but it is not. The absolute sinusoidal positional encoding
@@ -476,14 +451,12 @@ this, while the fixed absolute positional encoding is added to the token
 vector, RoPE is multiplied based on the first-principle derivation we
 went through above.
 
-#### 
 
 The Rotary Positional Encoding idea has seen a lot of success in many
 Pre-trained Language Models and is generating quite a buzz in the
 Chinese NLP community. There are more and more implementations of PLTs
 with RoPE, and I believe we'll see more of them in the future.
 
-#### 
 
 What I like about RoPE is that it formulated the problem of positional
 encoding in a principled manner, allowing us to see why this might work
@@ -491,7 +464,7 @@ and how this has come to be. Approaches with strong foundations like
 this is not usually seen in the deep learning community, where telltales
 of experiment results are often used to justify the design of a model.
 
-# References {#references .unnumbered}
+## References {##references .unnumbered}
 
 1.  *Attention is all you need* <https://arxiv.org/abs/1706.03762>
 

@@ -1,0 +1,61 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+search: false
+---
+
+@charset "utf-8";
+
+@font-face {
+  font-family: Granada;
+  src: url("/assets/fonts/FVGranada-regular.ttf");
+  font-weight: regular;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: "Uncut Sans";
+	font-style: normal;
+	font-weight: 400;
+	src: url("https://cdn.jsdelivr.net/gh/kaspernordkvist/uncut_sans/Webfonts/Uncut-Sans-Regular.woff2") format("woff2"), url("https://cdn.jsdelivr.net/gh/kaspernordkvist/uncut_sans/Webfonts/Uncut-Sans-Regular.woff") format("woff");
+	font-display: swap
+}
+
+$sans-serif : "Uncut Sans", sans-serif;
+$sans-serif-narrow : "Granada", sans-serif;
+
+// html {
+//     font-size: 14px; // change to whatever
+  
+//     @include breakpoint($medium) {
+//       font-size: 16px; // change to whatever
+//     }
+  
+//     @include breakpoint($large) {
+//       font-size: 18px; // change to whatever
+//     }
+  
+//     @include breakpoint($x-large) {
+//       font-size: 20px; // change to whatever
+//     }
+//   }
+
+
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+.wide {
+  .page {
+    @include breakpoint($large) {
+      float: none;    // disable from .page
+      margin: 0 auto; // center
+      padding-right: 0;
+    }
+
+    @include breakpoint($x-large) {
+      float: none;    // disable from .page
+      margin: 0 auto; // center
+      padding-right: 0;
+    }
+  }
+}

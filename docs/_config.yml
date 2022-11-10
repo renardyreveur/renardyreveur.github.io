@@ -17,38 +17,32 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
 title: 🦊 The Musings of a Shy Fox
+subtitle: "Esse Quam Videri"
 name: "Jeehoon Kang"
 email: renardyreveur@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
     Esse Quam Videri
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://renardyreveur.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+minimal_mistakes_skin: "aqua"
+
 twitter_username: jeehoonlerenard
-github_username:  renardyreveur
+# github_username:  renardyreveur
+search: true
+
 
 # Build settings
-#theme: minima
-#theme: minimal-mistakes-jekyll
+markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "aqua"
-plugins:
-  - jekyll-feed
-  - jekyll-include-cache
 
-defaults:
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
+# Outputting
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: /page:num/
+timezone: Asia/Seoul
+
+include:
+  - _pages
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -69,3 +63,49 @@ defaults:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+plugins:
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+
+footer:
+  links:
+  - label: "Twitter"
+    icon: "fab fa-fw fa-twitter-square"
+    url: "https://twitter.com/mmistakes"
+  - label: "GitHub"
+    icon: "fab fa-fw fa-github"
+    url: "https://github.com/mmistakes"
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      classes: wide
+      author_profile: True
+      read_time: true
+      comments: true
+      share: true
+      related: true
+
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
