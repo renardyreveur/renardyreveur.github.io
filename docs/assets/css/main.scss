@@ -50,6 +50,7 @@ $sans-serif-narrow : "Granada", sans-serif;
       float: none;    // disable from .page
       margin: 0 auto; // center
       padding-right: 0;
+
     }
 
     @include breakpoint($x-large) {
