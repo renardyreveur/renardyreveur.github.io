@@ -2,7 +2,7 @@
 layout: post
 title:  "Sinusoidal and Rotary Positional Encodings"
 date:   2022-11-07 15:15:52 +0900
-categories: attention transformers deep-learning positional-encodings
+# categories: attention transformers deep-learning positional-encodings
 ---
 
 # Introduction
@@ -192,7 +192,7 @@ Pairs of sine and cosine with the same period are used, and the period
 monotonically increases as you go down the pairs in dimension.
 
 ::: center
-![image](../assets/positional_encoding/sin_pos_enc.png)
+![image](/positional-encoding/assets/positional_encoding/sin_pos_enc.png)
 :::
 
 # Rotary Positional Encoding - RoPE
@@ -462,7 +462,7 @@ to each pair of dimensions of the token vector.
 ::: center
 ![It's hard to show the position encoded vector as RoPE is a function
 that applies rotations to the token vector. So I just added a picture of
-a random query vector that has gone through RoPE](../assets/positional_encoding/rotary.png)
+a random query vector that has gone through RoPE](/positional-encoding/assets/positional_encoding/rotary.png)
 :::
 
 #### 
