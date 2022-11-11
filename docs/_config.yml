@@ -18,31 +18,36 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: 🦊 The Musings of a Shy Fox
-subtitle: "Esse Quam Videri"
-name: "Jeehoon Kang"
-email: renardyreveur@gmail.com
-description: "Jeehoon stop being so opinionated!"
-url: "https://renardyreveur.github.io"
+subtitle: Esse Quam Videri
+description: Jeehoon stop being so opinionated!
+url: https://renardyreveur.github.io
 
+name: Jeehoon Kang
+email: renardyreveur@gmail.com
+github_username: renardyreveur
 repository: renardyreveur/renardyreveur.github.io
 
-minimal_mistakes_skin: "aqua"
+# Theme skin
+minimal_mistakes_skin: aqua
 
+# Lunr Search
+search: true
+
+# Reading time config
 words_per_minute: 200
 
+# Comments with utterances
 comments:
-  provider: "utterances"
+  provider: utterances
   utterances:
-    theme: "github-light"
-    issue_term: "pathname"
-    label: "Comment"
+    theme: github-light
+    issue_term: pathname
+    label: Comment
 
-search: true
-search_provider: lunr
 
 # Build settings
 markdown: kramdown
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+remote_theme: mmistakes/minimal-mistakes
 
 # Outputting
 permalink: /:categories/:title/
@@ -53,20 +58,19 @@ timezone: Asia/Seoul
 include:
   - _pages
 
-
 atom_feed:
   hide: true
 
 twitter:
-  username: "jeehoonlerenard"
+  username: jeehoonlerenard
 
-google_site_verification: "a0dpoG4kj3tc6QXhina5_fkJrIuvbNVLXA3qCZ8bKg4"
-naver_site_verification: "8f00affb31fc05f0f2a5b112d9620dc9ebef9592"
-
+# Analytics
+google_site_verification: a0dpoG4kj3tc6QXhina5_fkJrIuvbNVLXA3qCZ8bKg4
+naver_site_verification: 8f00affb31fc05f0f2a5b112d9620dc9ebef9592
 analytics:
-  provider: "google"
+  provider: google
   google:
-    tracking_id: "G-12SNRRFJB7"
+    tracking_id: G-12SNRRFJB7
     anonymize_ip: true
 
 # Exclude from processing.
@@ -103,12 +107,12 @@ plugins:
 
 footer:
   links:
-  - label: "Twitter"
-    icon: "fab fa-fw fa-twitter-square"
-    url: "https://twitter.com/jeehoonlerenard"
-  - label: "GitHub"
-    icon: "fab fa-fw fa-github"
-    url: "https://github.com/renardyreveur"
+  - label: Twitter"
+    icon: fab fa-fw fa-twitter-square
+    url: https://twitter.com/jeehoonlerenard
+  - label: GitHub
+    icon: fab fa-fw fa-github
+    url: https://github.com/renardyreveur
 
 defaults:
   # _posts
@@ -125,7 +129,7 @@ defaults:
       related: true
   # _pages
   - scope:
-      path: ""
+      path: "_pages"
       type: pages
     values:
       layout: single
