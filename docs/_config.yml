@@ -17,8 +17,8 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: 🦊 The Musings of a Shy Fox
-subtitle: Esse Quam Videri
+title: The Musings of a Shy Fox
+subtitle: Esse Quam Videri 🦊
 description: Jeehoon stop being so opinionated!
 url: https://renardyreveur.github.io
 
