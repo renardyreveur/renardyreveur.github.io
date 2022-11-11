@@ -6,10 +6,27 @@ search: false
 @charset "utf-8";
 
 @font-face {
-  font-family: Granada;
-  src: url("/assets/fonts/FVGranada-regular.ttf");
-  font-weight: regular;
+  font-family: 'FVGranadaBold';
+  src: url('/assets/fonts/FVGranada/ffvgranada-bold-webfont.eot');
+  src: url('/assets/fonts/FVGranada/fvgranada-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/fonts/FVGranada/fvgranada-bold-webfont.woff') format('woff'),
+       url('/assets/fonts/FVGranada/fvgranada-bold-webfont.ttf') format('truetype'),
+       url('/assets/fonts/FVGranada/fvgranada-bold-webfont.svg#FVGranadaBold') format('svg');
+  font-weight: normal;
   font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'FVGranadaRegular';
+  src: url('/assets/fonts/FVGranada/fvgranada-regular-webfont.eot');
+  src: url('/assets/fonts/FVGranada/fvgranada-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/fonts/FVGranada/fvgranada-regular-webfont.woff') format('woff'),
+       url('/assets/fonts/FVGranada/fvgranada-regular-webfont.ttf') format('truetype'),
+       url('/assets/fonts/FVGranada/fvgranada-regular-webfont.svg#FVGranadaRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
 }
 
 @font-face {
@@ -21,7 +38,9 @@ search: false
 }
 
 $sans-serif : "Uncut Sans", sans-serif;
-$sans-serif-narrow : "Granada", sans-serif;
+$sans-serif-narrow : "FVGranadaRegular", sans-serif;
+
+$header-font-family : "FVGrandaBold", sans-serif;
 
 // html {
 //     font-size: 14px; // change to whatever
