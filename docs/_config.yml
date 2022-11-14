@@ -19,7 +19,8 @@
 # in the templates via {{ site.myvariable }}.
 title: The Musings of a Shy Fox
 subtitle: Esse Quam Videri 🦊
-description: Jeehoon stop being so opinionated!
+description: Jeehoon's personal blog on Deep Learning, Mathematics, Life and Thoughts! On a journey to consolidate, opinionate, and articulate.
+
 url: https://renardyreveur.github.io
 
 name: Jeehoon Kang
