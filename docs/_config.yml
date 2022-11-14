@@ -58,20 +58,12 @@ timezone: Asia/Seoul
 include:
   - _pages
 
-atom_feed:
-  hide: true
-
 twitter:
   username: jeehoonlerenard
 
 # Analytics
 google_site_verification: a0dpoG4kj3tc6QXhina5_fkJrIuvbNVLXA3qCZ8bKg4
 naver_site_verification: 8f00affb31fc05f0f2a5b112d9620dc9ebef9592
-analytics:
-  provider: google
-  google:
-    tracking_id: G-12SNRRFJB7
-    anonymize_ip: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
