@@ -65,7 +65,12 @@ twitter:
 # Analytics
 google_site_verification: a0dpoG4kj3tc6QXhina5_fkJrIuvbNVLXA3qCZ8bKg4
 naver_site_verification: 8f00affb31fc05f0f2a5b112d9620dc9ebef9592
-
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: ""
+    anonymize_ip: false
+    
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
