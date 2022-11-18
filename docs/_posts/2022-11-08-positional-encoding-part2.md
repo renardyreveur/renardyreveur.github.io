@@ -1,5 +1,5 @@
 ---
-title:  "Positional Encodings of Attention Mechanisms"
+title:  "Positional Encodings of Attention Mechanisms: Sinusoidal, Rotary Positional Encodings (Part 2)"
 categories:
   - Blog
 tags:
@@ -8,69 +8,11 @@ tags:
   - deep-learning 
   - positional-encodings
 
+excerpt: Towards a principled approach to encode the 'position' of a sequence. Absolute and Relative.
+
 ---
 
-> All the world's a stage, \\
-> And all the men and women merely Players; \\
-> They have their exits and their entrances...
-
-Ever have that feeling when you stop and simply *perceive* the world around you, then become awe-struck at its beautiful orchestration?
-I certainly do, and amidst the frustration in attempting to describe that exact impression, you somehow find wisdom in Shakespeare's words.
-
-The monologue in *'As you like it'* presents us with a perspective we can take advantage of. If the world is a stage and everything in it are actors, the feelings must come from two things: the mise-en-scène of the stage and, more prominently, the **interactions** of the players within that scene.
-
-In mathematical language, the former would refer to the constraints, definitions, and assumptions we make for the model. The interactions would be composed of the following:
-
-- Interactions between different actors or with oneself, denoted by the multiplication of variables(or values derived from variables)
-- The relative strength between interactions given as ratios/weights/coefficients
-- Scaled/gated/convolved resultant values of interactions through mediating functions
-
-So at the risk of over-simplification, the language of description is a series of **well-structured multiplications and additions**. This framework helps abstract the dynamic and complex nature of our view of the stage. Yet, without a strict understanding of specific properties that we'd like the model to respect, the information enclosed within the context of weighted sums can become ambiguous. 
-
-**How can we infer the necessary differentiations between particular interactions?**
-{: .notice--primary} 
-
-Maybe an opinionated mise-en-scene can enforce a specific rule; perhaps the actors can carry a particular identifier by wearing a tag on their arm, and so on. There isn't one definite answer to this, but many. In this post, we'll look at **how various authors injected specificity in a sequence's order** as they tried to describe sequential phenomena such as natural language.
-
-{% include figure image_path="/assets/positional_encoding/order.png" alt="a line of block people"%}
-
-
-## Attention
-
-The attention mechanism, now being used everywhere, from computer vision
-problems, and natural language understanding, to sequence modelling and
-protein modelling, holds the same principles as described in the
-introduction. A well-trained attention layer aims to find suitable
-weights that signify the relative importance of elements in a
-**sequence** given the query of a specific timestep of the sequence. The
-weighted sum (using the weights from above) of the values representing
-each sequence step encapsulates the information embedded in the query
-timestep (or at least we hope it does). This is different from previous
-methods of modelling sequential data with neural networks such as RNNs
-and LSTMs, as they parse each sequence step in order, unlike the
-parallel nature of attention mechanisms.
-
-
-A scoring function generates the weights holding the relative importance
-of each value, such as a scaled dot product between the query and a key.
-As you can see, the query, key, and value are vectors generated for each
-sequence element used for attention calculations. They are created from
-separate learned weights that transform the input accordingly. With that
-out of the way, we can pose this question: "If an element has a key
-vector that does not depend on its position within the sequence, then
-surely the eventual value weights will have no difference from that
-element appearing at different timesteps?\" The scoring function taking
-in the query and the key will see no difference between taking the same
-key at the beginning or the end of the sequence. This is not a problem
-for static sequences with no meaning in their order/position, but it is
-a problem for sequences that carry meaning in their position, such as
-text, audio, and video. (e.g. The same noun can either be a subject or
-an object depending on its location within a sentence). RNNs and LSTMs
-inherently take the position of each element in their design as data is
-processed step-by-step, yet the parallel and scalable nature of
-attention are what we want to use. Handling this problem is where
-positional encodings come in.
-
+If you missed it, please check out [part 1](https://renardyreveur.github.io/blog/positional-encoding-part1)!
 
 ## Positional Encoding
 
@@ -462,6 +404,8 @@ and how this has come to be. Approaches with strong foundations like
 this is not usually seen in the deep learning community, where telltales
 of experiment results are often used to justify the design of a model.
 
+
+
 ## References
 
 1.  [*Attention is all you need*](https://arxiv.org/abs/1706.03762>)
@@ -473,3 +417,4 @@ of experiment results are often used to justify the design of a model.
 4.  [*Jonathan Kernes' blogpost on Positional Encoding*](https://towardsdatascience.com/master-positional-encoding-part-i-63c05d90a0c3)
 
 5.  [*Kazemnejad's blogpost on Positional Encoding*](https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)
+
