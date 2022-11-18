@@ -1,5 +1,5 @@
 ---
-title:  "Sinusoidal and Rotary Positional Encodings"
+title:  "Positional Encodings of Attention Mechanisms"
 categories:
   - Blog
 tags:
@@ -7,35 +7,33 @@ tags:
   - transformers
   - deep-learning 
   - positional-encodings
+
 ---
 
+> All the world's a stage, \\
+> And all the men and women merely Players; \\
+> They have their exits and their entrances...
 
-Let's face it; the world is too complicated. Things change over time,
-multiple variables are associated with any given event or phenomenon,
-and the layers of abstraction built up are dizzying. In our attempts to
-make sense of this complex, dynamic world around us, we seek to find
-*relationships between these variables*, uncovering the underlying
-patterns embedded in those abstractions.
-<!-- {: .notice} -->
+Ever have that feeling when you stop and simply *perceive* the world around you, then become awe-struck at its beautiful orchestration?
+I certainly do, and amidst the frustration in attempting to describe that exact impression, you somehow find wisdom in Shakespeare's words.
 
+The monologue in *'As you like it'* presents us with a perspective we can take advantage of. If the world is a stage and everything in it are actors, the feelings must come from two things: the mise-en-scène of the stage and, more prominently, the **interactions** of the players within that scene.
 
-Deep Learning is a method that attempts to uncover these patterns by
-learning from data. We represent a given problem with the data that it
-generates. By fitting the data to a neural network structure, we find
-how the dimensions within the data are interconnected. The way that deep
-learning captures that relationship is quite simple; all you have to do
-is look at how a neural network is made up. The perceptron, the building
-blocks of neural networks, are linear combinations of their inputs with
-some non-linearity injected in. Thus, at the most basic level, we are
-modelling the inter-dependencies between given variables with their
-weighted sums. For example, convolutional neural networks(CNN) slide
-multiple kernels of learnable weights over the 2D pixel array producing
-a weighted sum between the kernel and windowed pixel area to find local
-spatial patterns. Recurrent neural networks(RNN) and Long Short Term
-Memory(LSTM) networks constantly weigh between the current step input
-and the previous state to find temporal patterns. And on and on. We're
-going to focus on this notion of weighted sums in this article as we
-explore the idea of positional encoding.
+In mathematical language, the former would refer to the constraints, definitions, and assumptions we make for the model. The interactions would be composed of the following:
+
+- Interactions between different actors or with oneself, denoted by the multiplication of variables(or values derived from variables)
+- The relative strength between interactions given as ratios/weights/coefficients
+- Scaled/gated/convolved resultant values of interactions through mediating functions
+
+So at the risk of over-simplification, the language of description is a series of **well-structured multiplications and additions**. This framework helps abstract the dynamic and complex nature of our view of the stage. Yet, without a strict understanding of specific properties that we'd like the model to respect, the information enclosed within the context of weighted sums can become ambiguous. 
+
+**How can we infer the necessary differentiations between particular interactions?**
+{: .notice--primary} 
+
+Maybe an opinionated mise-en-scene can enforce a specific rule; perhaps the actors can carry a particular identifier by wearing a tag on their arm, and so on. There isn't one definite answer to this, but many. In this post, we'll look at **how various authors injected specificity in a sequence's order** as they tried to describe sequential phenomena such as natural language.
+
+{% include figure image_path="/assets/positional_encoding/order.png" alt="a line of block people"%}
+
 
 ## Attention
 
@@ -464,18 +462,14 @@ and how this has come to be. Approaches with strong foundations like
 this is not usually seen in the deep learning community, where telltales
 of experiment results are often used to justify the design of a model.
 
-## References {##references .unnumbered}
+## References
 
-1.  *Attention is all you need* <https://arxiv.org/abs/1706.03762>
+1.  [*Attention is all you need*](https://arxiv.org/abs/1706.03762>)
 
-2.  *Roformer - paper that introduced RoPE*
-    <https://arxiv.org/abs/2104.09864>
+2.  [*Roformer - paper that introduced RoPE*](https://arxiv.org/abs/2104.09864)
 
-3.  *EleutherAI blogpost on RoPE*
-    <https://blog.eleuther.ai/rotary-embeddings/>
+3.  [*EleutherAI blogpost on RoPE*](https://blog.eleuther.ai/rotary-embeddings/)
 
-4.  *Jonathan Kernes' blogpost on Positional Encoding*
-    <https://towardsdatascience.com/master-positional-encoding-part-i-63c05d90a0c3>
+4.  [*Jonathan Kernes' blogpost on Positional Encoding*](https://towardsdatascience.com/master-positional-encoding-part-i-63c05d90a0c3)
 
-5.  *Kazemnejad's blogpost on Positional Encoding*
-    <https://kazemnejad.com/blog/transformer_architecture_positional_encoding/>
+5.  [*Kazemnejad's blogpost on Positional Encoding*](https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)

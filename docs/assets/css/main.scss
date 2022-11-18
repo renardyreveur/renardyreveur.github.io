@@ -17,6 +17,10 @@ $header-font-family : "General Sans", sans-serif;
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+.notice--primary {
+  font-size: $type-size-5 !important;
+}
+
 .wide {
   .page {
     @include breakpoint($large) {
