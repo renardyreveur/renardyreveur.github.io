@@ -5,59 +5,13 @@ search: false
 
 @charset "utf-8";
 
-@font-face {
-  font-family: 'FVGranadaBold';
-  src: url('/assets/fonts/FVGranada/ffvgranada-bold-webfont.eot');
-  src: url('/assets/fonts/FVGranada/fvgranada-bold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/FVGranada/fvgranada-bold-webfont.woff') format('woff'),
-       url('/assets/fonts/FVGranada/fvgranada-bold-webfont.ttf') format('truetype'),
-       url('/assets/fonts/FVGranada/fvgranada-bold-webfont.svg#FVGranadaBold') format('svg');
-  font-weight: normal;
-  font-style: normal;
+@font-face {font-family: 'Gambetta', serif;}
+@font-face {font-family: 'General Sans', sans-serif;}
+@font-face {font-family: 'Chubbo', sans-serif;}
 
-}
-
-@font-face {
-  font-family: 'FVGranadaRegular';
-  src: url('/assets/fonts/FVGranada/fvgranada-regular-webfont.eot');
-  src: url('/assets/fonts/FVGranada/fvgranada-regular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/FVGranada/fvgranada-regular-webfont.woff') format('woff'),
-       url('/assets/fonts/FVGranada/fvgranada-regular-webfont.ttf') format('truetype'),
-       url('/assets/fonts/FVGranada/fvgranada-regular-webfont.svg#FVGranadaRegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-
-}
-
-@font-face {
-	font-family: "Uncut Sans";
-	font-style: normal;
-	font-weight: 400;
-	src: url("https://cdn.jsdelivr.net/gh/kaspernordkvist/uncut_sans/Webfonts/Uncut-Sans-Regular.woff2") format("woff2"), url("https://cdn.jsdelivr.net/gh/kaspernordkvist/uncut_sans/Webfonts/Uncut-Sans-Regular.woff") format("woff");
-	font-display: swap
-}
-
-$sans-serif : "Uncut Sans", sans-serif;
-$sans-serif-narrow : "FVGranadaRegular", sans-serif;
-
-$header-font-family : "FVGrandaBold", sans-serif;
-
-// html {
-//     font-size: 14px; // change to whatever
-  
-//     @include breakpoint($medium) {
-//       font-size: 16px; // change to whatever
-//     }
-  
-//     @include breakpoint($large) {
-//       font-size: 18px; // change to whatever
-//     }
-  
-//     @include breakpoint($x-large) {
-//       font-size: 20px; // change to whatever
-//     }
-//   }
-
+$sans-serif : "Gambetta", serif;
+$sans-serif-narrow: "Chubbo", sans-serif;
+$header-font-family : "General Sans", sans-serif;
 
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
