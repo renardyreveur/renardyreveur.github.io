@@ -1,5 +1,8 @@
 ---
-title:  "Positional Encodings of Attention Mechanisms: Sinusoidal, Rotary Positional Encodings (Part 2)"
+title:  "Positional Encodings of Attention Mechanisms: <br>
+<span style='font-size:0.8em'> 
+Sinusoidal, Rotary Positional Encodings (Part 2)
+</span>"
 categories:
   - Blog
 tags:
