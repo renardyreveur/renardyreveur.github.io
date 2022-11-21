@@ -1,8 +1,5 @@
 ---
-title:  "Positional Encodings of Attention Mechanisms: 
-<br> <span style='font-size:0.8em'> 
-Background - Weighted Sums and Attention(Part 1)
-</span>"
+title:  "Positional Encodings of Attention Mechanisms: Weighted Sums and Attention(Part 1)"
 
 categories:
   - Blog
@@ -86,7 +83,7 @@ Typically, the 'query', 'key' and 'value' representation of inputs are real vect
 
 We have a sketch that extracts better features and a way to signify the relative importance between locations. What needs to be added is the ability to distinguish the same input appearing at different locations. **For example, given the same input at two different time steps, its query, key and value representations would be the same**. This isn't suitable when we know that *'there must be a reason behind an element's location within the sequence'*. Recurrent Neural Networks didn't have that problem as it updates the past context step-by-step, thus inherently utilising the order of the inputs.
 
-Two ways to inject that additional knowledge into the attention model are noticeable right off the bat. **Either adjust the score with some sort of positional information (i.e modify the query and keys) or enhance the value representation with awareness of its location.** The original authors of [*'Attention is all you need'*](https://arxiv.org/abs/1706.03762>) focuses on the latter(although technically the input is modified by adding a positional encoding, and thus all of the query, key (and thus the scores are modified too), and value would be different, the crux of it (at least to me) lies on the modified value representation). Others have explored (principled) approaches to the former, and we'll look at the diverse ways they've done it in the [next post](https://renardyreveur.github.io/blog/positional-encoding-part2).
+Two ways to inject that additional knowledge into the attention model are noticeable right off the bat. **Either adjust the score with some sort of positional information (i.e modify the query and keys) or enhance the value representation with awareness of its location.** The original authors of [*'Attention is all you need'*](https://arxiv.org/abs/1706.03762>) adds an absolute sinusoidal vector(with relative properties) to the input to adjust all of the query, key, and value. Others focus on the key and query and their relative distances, and we'll look at the diverse ways they've done it in the [next post](https://renardyreveur.github.io/blog/positional-encoding-part2).
 
 Attention mechanisms are now being used everywhere from Computer Vision, Large Language Models, to Protein Folding Predictions and much more. It's a powerful tool that is scalable, configurable and easily trainable. The way that the design of it helps encapsulate the essence of what a sequence carries is an example of masterful directorship of a stage so sought after. 
 
